@@ -102,6 +102,9 @@ An example of a character that cannot be directly used in a string is a double q
 ```python
 print("This doesnt "execute")
 print("This will \" execute")
+print("This will \"help to\" execute")
+print("hey", 6 ,7, sep="-", end="009\n")
+
 ```
 
 # More on Print statement
