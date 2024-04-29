@@ -29,16 +29,19 @@ i
 Note: This method of specifying the start and end index to specify a part of a string is called slicing. 
 ## Slicing Example:
 ```python
+
+#List example
 pie = "ApplePie"
 print(pie[:5])      #Slicing from Start
 print(pie[5:])      #Slicing till End
 print(pie[2:6])     #Slicing in between
 print(pie[-8:])     #Slicing using negative index
 
+#Tuple example
+my_tuple = ("apple", "banana", "cherry", "date")
 # Perform string slicing on the second element of the tuple
 sliced_string = my_tuple[1][2:5]  # Slicing the second element "banana", then taking characters from index 2 to 4
 print(sliced_string)  # Output: nan
-
 ```
 ## Output:
 ```
@@ -63,5 +66,8 @@ C
 D
 E
 ```
+
+Can't perform string slicing on sets or dictionaries.
+
 
 ## [Next Lesson>>](https://replit.com/@codewithharry/13-Day13-String-Methods)
