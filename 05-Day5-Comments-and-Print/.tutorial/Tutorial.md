@@ -103,7 +103,6 @@ An example of a character that cannot be directly used in a string is a double q
 print("This doesnt "execute")
 print("This will \" execute")
 print("This will \"always\" execute")
-print("hey", 6 ,7, sep="-", end="009\n")
 ```
 
 # More on Print statement
@@ -111,6 +110,7 @@ The syntax of a print statement looks something like this:
 
 ```python
 print(object(s), sep=separator, end=end, file=file, flush=flush)
+print("hey", 6 ,7, sep="-", end="009\n")
 ```
 
 ## Other Parameters of Print Statement 
