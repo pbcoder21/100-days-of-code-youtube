@@ -13,3 +13,19 @@ print(timestamp)
 # https://docs.python.org/3/library/time.html#time.strftime
 ```
 ## [Next Lesson>>](https://replit.com/@codewithharry/16-Day-16-Match-Case)
+
+Solution: 
+
+import time
+timestamp = time.strftime('%H:%M:%S')
+print("The time right now is",timestamp)
+hours = int(time.strftime('%H'))
+
+if hours >= 0 and hours <= 12:
+    print("Good Morning Captain")
+elif hours > 12 and hours < 17:
+    print("Good Aternoon Captain")
+elif hours > 17 and hours < 20:
+    print("Good Evening Captain")
+else:
+    print("Good Night")
