@@ -14,7 +14,7 @@ Object is real-life objects      e.g email, man, student  etc
 Every Object have two properties 1) Attributes  2) Behaviors
 
 Email (Blueprint) ---- 1) Attributes : heading, subject, name, recipients etc
-                       2) Behaviours : sending, adding attachments 
+                          2) Methods/Behaviours : sending, adding attachments 
 
 An object is an instance of a class, and it contains its own data and methods. For example, you could create a class called "Person" that has properties such as name and age, and methods such as speak() and walk(). Each instance of the Person class would be a unique object with its own name and age, but they would all have the same methods to speak and walk.
 
