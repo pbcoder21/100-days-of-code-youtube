@@ -1,0 +1,132 @@
+kubectl run mypod --image=nginx
+kubetl get po
+kubectl exec it mypod -- /bin/bash
+> id
+	uid=0(root) gid=0(root) groups=0(root)
+
+ 
+---------------------------------------------------
+vim sc-demo-1.yaml
+# This YAML file demonstrates the implementation of security context at the pod level.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo
+spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+  volumes:
+  - name: demo-vol
+    emptyDir: {}
+  containers:
+  - name: sc-demo
+    image: busybox:1.28
+    command: [ "sh", "-c", "sleep 1h" ]
+    volumeMounts:
+    - name: demo-vol
+      mountPath: /data/demo
+---
+kubectl apply -f sc-demo-1.yaml
+kubectl get po
+kubectl exec -it security-context-demo -- sh
+> id
+> ps aux
+> cd /data/demo/ 				#Since a volume is mounted, you can navigate to the mounted directory and perform file operations:
+  >  echo hello >> mfiles
+  >  ls -l
+
+These commands change the directory to "/data/demo", appends the text "hello devopspro" to a file named "myfile", and lists the files in the directory.
+--------------------------------------------------
+vim sc-demo-2.yaml
+# This YAML file demonstrates the implementation of security context at both the pod and container level.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-2
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: sc-demo-2
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      runAsUser: 2000
+---
+kubectl apply -f sc-demo-2.yaml
+kubectl exec -it security-context-demo-2 -- /bin/sh
+> ps aux   #2000 should be there
+> id
+
+#The ps aux command displays the running processes inside the container. The id command shows the user ID and 
+ group ID of the current user running inside the container.
+
+----------------------------------------------
+kubectl run mypod2 --image=nginx
+kubectl get po
+kubectl exec -it mypod2 -- /bin/bash
+
+#To install the required package, run the following commands inside the pod:
+> apt update
+> apt install iproute2
+These commands update the package lists and install the "iproute2" package, which provides advanced IP routing and network devices configuration.
+
+To check the network interfaces, run the following command:
+>ip link show
+This command displays the network interfaces and their details, such as name, state, and MAC address.
+
+To add an IP address to the eth0 network interface, use the following command:
+> ip addr add 192.168.0.10/24 dev eth0
+This command assigns the IP address "192.168.0.10" with a subnet mask of "/24" to the "eth0" network interface.
+---
+vim sc-demo-3.yaml
+# This YAML file demonstrates the addition of the NET_ADMIN capability to a container.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-3
+spec:
+  containers:
+  - name: sc-demo-3
+    image: ubuntu
+    command: [ "sh", "-c", "sleep 1h" ]
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN"] 		#Network related
+---
+kubectl apply -f sc-demo-3.yaml
+kubectl exec -it security-context-demo-3 -- /bin/bash
+
+#To install the required package, run the following commands inside the pod:
+> apt update
+> apt install iproute2
+These commands update the package lists and install the "iproute2" package, which provides advanced IP routing and network devices configuration.
+
+To check the network interfaces, run the following command:
+> ip link show
+This command displays the network interfaces and their details, such as name, state, and MAC address.
+
+To add an IP address to the eth0 network interface, use the following command:
+> ip addr add 192.168.0.10/24 dev eth0
+This command assigns the IP address "192.168.0.10" with a subnet mask of "/24" to the "eth0" network interface.
+
+To check the added IP address, run the following command:
+> ip addr show eth0
+This command displays the details of the "eth0" network interface, including the assigned IP address.
+
+
+
+
+
+
+
+
+
+
+
+
+
